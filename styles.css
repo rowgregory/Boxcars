@@ -170,9 +170,9 @@ i {
 
 .dice {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 178px;
-  transform: translateX(-50%);
+  /* transform: translateX(-50%); */
   height: 100px;
   box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
 }
@@ -183,4 +183,27 @@ i {
 .winner .player-name {
   font-weight: 300;
   color: #eb4d4d;
+}
+
+.shake {
+  animation: shakeOne 1s forwards linear;
+}
+
+@keyframes shakeOne {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.player-box-2 {
+  background: #79bad0 !important;
 }

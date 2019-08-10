@@ -22,7 +22,13 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
         `#current-${activePlayer}`
       ).textContent = roundScore;
     } else {
-      nextPlayer();
+      gamePlaying = false;
+      diceImg.classList.add("shake");
+      setTimeout(() => {
+        console.log(diceImg);
+        nextPlayer();
+        diceImg.classList.remove("shake");
+      }, 1000);
     }
 
     lastDice = dice;
@@ -62,6 +68,7 @@ document.querySelector(".btn-hold").addEventListener("click", () => {
 });
 
 const nextPlayer = () => {
+  gamePlaying = true;
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
   // set round score back to 0
   roundScore = 0;
