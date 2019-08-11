@@ -10,7 +10,7 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
     let diceImg = document.querySelector(".dice");
     let diceImg2 = document.querySelector(".dice2");
     diceImg.style.display = "block";
-    diceImg.src = `dice-${dice}.png`;
+    diceImg.src = `/images/dice-${dice}.png`;
 
     if (dice === 6 && lastDice === 6) {
       // Player looses score
@@ -19,7 +19,7 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
       document.querySelector(`#score-${activePlayer}`).classList.add("scale");
       diceImg.src = `dice-${dice}.png`;
       diceImg.style.left = "40%";
-      diceImg2.src = `dice-${dice}.png`;
+      diceImg2.src = `/images/dice-${dice}.png`;
       diceImg2.style.left = "52%";
       diceImg2.style.display = "block";
       setTimeout(() => {
@@ -29,8 +29,9 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
       }, 1000);
     } else if (dice !== 1) {
       roundScore += dice;
-      if (roundScore % 5 === 0) {
-        console.log("Content coming");
+      if (roundScore === 21) {
+        roundScore += roundScore;
+        console.log(roundScore);
       }
       document.querySelector(
         `#current-${activePlayer}`
