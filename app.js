@@ -12,12 +12,7 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
     diceImg.style.display = "block";
     diceImg.src = `dice-${dice}.png`;
 
-    if (scores[activePlayer] % 5 === 0) {
-      // console.log(scores[activePlayer]);
-    }
-
     if (dice === 6 && lastDice === 6) {
-      console.log("YOU HAVE CLICKED 2 6S");
       // Player looses score
       scores[activePlayer] = 0;
       document.querySelector(`#score-${activePlayer}`).textContent = 0;
@@ -34,9 +29,8 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
       }, 1000);
     } else if (dice !== 1) {
       roundScore += dice;
-      console.log(roundScore);
       if (roundScore % 5 === 0) {
-        console.log("I am divisible by 5");
+        console.log("Content coming");
       }
       document.querySelector(
         `#current-${activePlayer}`
@@ -59,7 +53,6 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
 document.querySelector(".btn-hold").addEventListener("click", () => {
   if (gamePlaying) {
     scores[activePlayer] += roundScore;
-    // console.log(scores, "SCORES");
 
     document.querySelector(`#score-${activePlayer}`).textContent =
       scores[activePlayer];
