@@ -6,29 +6,50 @@ let lastDice;
 
 document.querySelector(".btn-roll").addEventListener("click", () => {
   if (gamePlaying) {
-    let dice = Math.floor(Math.random() * 6) + 1;
+    let dice = Math.floor(Math.random() * (6 - 5 + 1)) + 5;
     let diceImg = document.querySelector(".dice");
+    let diceImg2 = document.querySelector(".dice2");
     diceImg.style.display = "block";
     diceImg.src = `dice-${dice}.png`;
 
+    if (scores[activePlayer] % 5 === 0) {
+      // console.log(scores[activePlayer]);
+    }
+
     if (dice === 6 && lastDice === 6) {
+      console.log("YOU HAVE CLICKED 2 6S");
       // Player looses score
       scores[activePlayer] = 0;
       document.querySelector(`#score-${activePlayer}`).textContent = 0;
-      nextPlayer();
+      document.querySelector(`#score-${activePlayer}`).classList.add("scale");
+      diceImg.src = `dice-${dice}.png`;
+      diceImg.style.left = "40%";
+      diceImg2.src = `dice-${dice}.png`;
+      diceImg2.style.left = "52%";
+      diceImg2.style.display = "block";
+      setTimeout(() => {
+        diceImg2.style.display = "none";
+        diceImg.style.left = "45%";
+        nextPlayer();
+      }, 1000);
     } else if (dice !== 1) {
       roundScore += dice;
+      console.log(roundScore);
+      if (roundScore % 5 === 0) {
+        console.log("I am divisible by 5");
+      }
       document.querySelector(
         `#current-${activePlayer}`
       ).textContent = roundScore;
     } else {
       gamePlaying = false;
+      diceImg.style.border = "red 2px solid";
       diceImg.classList.add("shake");
       setTimeout(() => {
-        console.log(diceImg);
         nextPlayer();
+        diceImg.style.border = "none";
         diceImg.classList.remove("shake");
-      }, 1000);
+      }, 2000);
     }
 
     lastDice = dice;
@@ -38,7 +59,7 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
 document.querySelector(".btn-hold").addEventListener("click", () => {
   if (gamePlaying) {
     scores[activePlayer] += roundScore;
-    console.log(scores, "SCORES");
+    // console.log(scores, "SCORES");
 
     document.querySelector(`#score-${activePlayer}`).textContent =
       scores[activePlayer];
@@ -68,6 +89,7 @@ document.querySelector(".btn-hold").addEventListener("click", () => {
 });
 
 const nextPlayer = () => {
+  lastDice = "";
   gamePlaying = true;
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
   // set round score back to 0
@@ -90,6 +112,7 @@ function init() {
   gamePlaying = true;
 
   document.querySelector(".dice").style.display = "none";
+  document.querySelector(".dice2").style.display = "none";
   document.getElementById("score-0").textContent = "0";
   document.getElementById("score-1").textContent = "0";
   document.getElementById("current-0").textContent = "0";
