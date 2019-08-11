@@ -6,7 +6,7 @@ let lastDice;
 
 document.querySelector(".btn-roll").addEventListener("click", () => {
   if (gamePlaying) {
-    let dice = Math.floor(Math.random() * (6 - 5 + 1)) + 5;
+    let dice = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
     let diceImg = document.querySelector(".dice");
     let diceImg2 = document.querySelector(".dice2");
     diceImg.style.display = "block";
