@@ -17,17 +17,24 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
       gamePlaying = false;
       scores[activePlayer] = 0;
       document.querySelector(`#score-${activePlayer}`).textContent = 0;
-      document.querySelector(`#score-${activePlayer}`).classList.add("scale");
-      diceImg.src = `dice-${dice}.png`;
-      diceImg.style.left = "40%";
+      document.querySelector(`#score-${activePlayer}`).classList.add("blink");
+
+      diceImg.style.left = "39%";
+      diceImg.classList.add("blink");
+      diceImg2.classList.add("blink");
       diceImg2.src = `dice-${dice}.png`;
-      diceImg2.style.left = "52%";
+      diceImg2.style.left = "51%";
       diceImg2.style.display = "block";
       setTimeout(() => {
         diceImg2.style.display = "none";
         diceImg.style.left = "45%";
+        document
+          .querySelector(`#score-${activePlayer}`)
+          .classList.remove("blink");
+        diceImg.classList.remove("blink");
+        diceImg2.classList.remove("blink");
         nextPlayer();
-      }, 1000);
+      }, 3000);
     } else if (dice !== 1) {
       roundScore += dice;
       if (roundScore === 21) {
@@ -81,6 +88,13 @@ document.querySelector(".btn-hold").addEventListener("click", () => {
       nextPlayer();
     }
   }
+});
+
+document.querySelector(".directions").addEventListener("click", () => {
+  document.querySelector(".player-0-panel").style.display = "none";
+  document.querySelector(".player-1-panel").style.display = "none";
+
+  // document.querySelector(".player-name-1").style.display = "none";
 });
 
 const nextPlayer = () => {
